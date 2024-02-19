@@ -40,3 +40,7 @@ export async function requestLogout() {
     
       return response;
 }
+
+export async function requestJobs() {
+    
+}

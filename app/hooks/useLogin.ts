@@ -3,7 +3,7 @@ import { requestLogin } from "../services/api";
 import useInput from "./useInput";
 import { FormEvent, useState } from "react";
 import { useDispatch } from "react-redux";
-import { setUsername } from "../store/user";
+import { setUserData, clearUserData } from "../store/user";
 
 export default function useLogin() {
     const usernameInput = useInput();
@@ -24,24 +24,23 @@ export default function useLogin() {
                 console.log(`Successfully logged the user ${usernameInput.value}`);
                 router.replace("/dashboard");
 
-                dispatch(setUsername({
-                    username: usernameInput.value
+                const body = await response.json();
+
+                dispatch(setUserData({
+                    username: usernameInput.value,
+                    userId: body.user._id
                 }));
             } else {
                 setError("Wrong password or username.");
                 console.log(`Failed to log in user ${usernameInput.value}, status: ${response.status}`);
                 
-                dispatch(setUsername({
-                    username: ""
-                }));
+                dispatch(clearUserData({}));
             }
         } catch {
             setError("Something happened on our end :(");
             console.log(`Failed to log in user ${usernameInput.value}, an error was thrown!`);
             
-            dispatch(setUsername({
-                username: ""
-            }));
+            dispatch(clearUserData({}));
         }
         
 

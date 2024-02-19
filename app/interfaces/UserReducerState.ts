@@ -1,3 +1,4 @@
 export default interface UserReducerState {
-    username: String
+    username: string;
+    userId: string;
 };

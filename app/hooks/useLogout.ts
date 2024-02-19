@@ -1,7 +1,7 @@
 import { useRouter } from "next/navigation";
 import { requestLogout } from "../services/api";
 import { useDispatch } from "react-redux";
-import { setUsername } from "../store/user";
+import { clearUserData, setUserData } from "../store/user";
 
 export default function useLogout() {
     const router = useRouter();
@@ -14,9 +14,7 @@ export default function useLogout() {
             if(response.status === 200) {
                 console.log("Successfully logged out");
                 
-                dispatch(setUsername({
-                    username: ""
-                }));
+                dispatch(clearUserData({}));
 
                 router.replace("/");
             } else {
