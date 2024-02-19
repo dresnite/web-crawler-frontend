@@ -33,7 +33,7 @@ export async function requestSignup(username: string, password: string) {
 }
 
 export async function requestLogout() {
-    const response = await fetch(`${BACKEND_URL}/user/register`, {
+    const response = await fetch(`${BACKEND_URL}/user/logout`, {
         method: "POST",
         credentials: "include"
       });

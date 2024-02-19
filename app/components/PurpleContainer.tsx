@@ -9,9 +9,9 @@ interface PurpleContainerProps {
 export default function PurpleContainer({ children, centered = true }: PurpleContainerProps) {
     return (
         <div className={clsx(
-            "flex items-center min-h-screen w-full bg-bgPurple",
+            "flex min-h-screen w-full bg-bgPurple",
             {
-                "justify-center": centered
+                "items-center justify-center": centered
             }
         )}>
             {children}
