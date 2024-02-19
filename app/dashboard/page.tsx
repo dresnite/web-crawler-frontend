@@ -9,7 +9,6 @@ export default function DashboardPage() {
         <PurpleContainer centered={false}>
             <div className="flex flex-col flex-grow">
                 <Navbar />
-
                 <Jobs />
             </div>
             

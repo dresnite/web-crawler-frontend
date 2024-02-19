@@ -1,12 +1,14 @@
 import useUsername from "@/app/hooks/useUsername";
 import Job from "./Job";
 import EmptyJob from "./EmptyJob";
-import Status from "@/app/utils/Status";
 import useJobs from "@/app/hooks/useJobs";
+import CreateJob from "./CreateJob";
+import useJobCreationSection from "@/app/hooks/useCreateJobSection";
 
 export default function Jobs() {
     const username = useUsername();
     const jobs = useJobs();
+    const jobCreationSection = useJobCreationSection();
 
     return (
         <div className="dashboard-container mt-2 flex-col flex-grow mb-10">
@@ -14,10 +16,11 @@ export default function Jobs() {
 
             <div className="flex items-center justify-center md:justify-between md:items-center mt-10">
                 <h1 className="font-bold text-xl">Your Crawling Jobs</h1>
-                <button className="purple-button hidden md:block">Create new job</button>
+                <button className="purple-button hidden md:block" onClick={jobCreationSection.toggleVisibility}>Create new job</button>
             </div>
 
             <div>
+                {jobCreationSection.isVisible && <CreateJob />}
                 {jobs.length === 0 && <EmptyJob />}
                 {jobs.length > 0 && jobs.map((job, index) => {
                     return <Job key={index} seed={job.seed} status={job.status} />
