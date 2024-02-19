@@ -1,9 +1,11 @@
-import Image from "next/image";
+
+import LoginForm from "./components/auth/LoginForm";
+import PurpleContainer from "./components/PurpleContainer";
 
 export default function Home() {
   return (
-    <div>
-      <p>Hello world</p>
-    </div>
+    <PurpleContainer>
+      <LoginForm />
+    </PurpleContainer>
   );
 }
