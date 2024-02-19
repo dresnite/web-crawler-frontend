@@ -41,6 +41,29 @@ export async function requestLogout() {
       return response;
 }
 
-export async function requestJobs() {
+export async function requestJobs(ownerId: string) {
+    const originalJobsByOwnerQuery = `#graphql
+        query JobsByOwner($owner: ID!) {
+            originalCrawlingJobsByOwner(owner: $owner) {
+                seed,
+                status
+            }
+        }
+    `;
+
+    const response = await fetch(`${BACKEND_URL}/graphql`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        credentials: "include",
+        body: JSON.stringify({
+          query: originalJobsByOwnerQuery,
+          variables: {
+            owner: ownerId
+          }
+        }),
+      });
     
+      return response;
 }

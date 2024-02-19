@@ -19,7 +19,11 @@
 }
 
 .purple-button {
-    @apply text-white bg-bgPurple px-4 py-3 rounded-full;
+    @apply text-white bg-bgPurple px-4 py-3 rounded-full hover:bg-darkPurple;
+}
+
+.job-container {
+  @apply flex flex-col gap-5 md:flex-row border-black border-opacity-20 border-4 px-5 py-6 mt-10 rounded-3xl items-center;
 }
 
 .lds-ring {
