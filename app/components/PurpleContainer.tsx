@@ -1,12 +1,19 @@
 import { ReactNode } from "react";
+import clsx from "clsx";
 
 interface PurpleContainerProps {
     children: ReactNode;
+    centered?: boolean;
 }
 
-export default function PurpleContainer({ children }: PurpleContainerProps) {
+export default function PurpleContainer({ children, centered = true }: PurpleContainerProps) {
     return (
-        <div className="flex items-center justify-center min-h-screen w-full bg-bgPurple">
+        <div className={clsx(
+            "flex items-center min-h-screen w-full bg-bgPurple",
+            {
+                "justify-center": centered
+            }
+        )}>
             {children}
         </div>
     );
