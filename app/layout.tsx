@@ -6,8 +6,11 @@ import Providers from "./components/Providers";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "Web Crawler",
+  title: "Crawler",
   description: "A simple web crawler",
+  icons: {
+    icon: "./favicon.ico",
+  },
 };
 
 export default function RootLayout({

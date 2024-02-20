@@ -15,13 +15,13 @@ export default function useJobs() {
 
     const ownerId = useUserId();
 
-    useEffect(() => {
-        const interval = setInterval(() => {
-            sendJobsRequest();
-        }, 2000);
+    // useEffect(() => {
+    //     const interval = setInterval(() => {
+    //         sendJobsRequest();
+    //     }, 2000);
 
-        return  () => clearInterval(interval);
-    }, []);
+    //     return  () => clearInterval(interval);
+    // }, []);
 
     useEffect(() => {
         console.log("received: " + parentJobId);
@@ -41,8 +41,6 @@ export default function useJobs() {
 
                 setJobs((parentJobId) ? body.data.crawlingJobsByParentId : body.data.originalCrawlingJobsByOwner);
             }
-
-
         } catch {
             setError("Something bad happened");
         }
@@ -66,5 +64,5 @@ export default function useJobs() {
         await sendJobsRequest();
     }
 
-    return { parentJobId, isLoading, error, jobs, handleRefresh, getRefreshText, getEmptyText };
+    return { isLoading, error, jobs, handleRefresh, getRefreshText, getEmptyText };
 }

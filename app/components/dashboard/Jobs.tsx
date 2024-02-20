@@ -4,11 +4,14 @@ import EmptyJob from "./EmptyJob";
 import useJobs from "@/app/hooks/useJobs";
 import CreateJob from "./CreateJob";
 import useJobCreationSection from "@/app/hooks/useCreateJobSection";
+import { useSelector } from "react-redux";
+import GlobalState from "@/app/interfaces/GlobalState";
 
 export default function Jobs() {
     const username = useUsername();
-    const { jobs, isLoading, handleRefresh, getRefreshText, getEmptyText, parentJobId } = useJobs();
+    const { jobs, isLoading, handleRefresh, getRefreshText, getEmptyText } = useJobs();
     const jobCreationSection = useJobCreationSection();
+    const parentJobId = useSelector((state: GlobalState) => state.job.parentJobId);
 
     return (
         <div className="dashboard-container mt-2 flex-col flex-grow max-w-full mb-10">
