@@ -1,8 +1,8 @@
 import { useSelector } from "react-redux";
-import UserReducerState from "../interfaces/UserReducerState";
+import GlobalState from "../interfaces/GlobalState";
 
 export default function useUsername() {
-    const username = useSelector((state: UserReducerState) => state.username);
+    const username = useSelector((state: GlobalState) => state.user.username);
 
     return username;
 }

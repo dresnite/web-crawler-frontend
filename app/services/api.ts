@@ -41,12 +41,43 @@ export async function requestLogout() {
       return response;
 }
 
-export async function requestJobs(ownerId: string) {
+export async function requestJobsByParentId(parentId: string) {
+  const crawlingJobsByParentIdQuery = `#graphql
+    query JobsByParentId($parentId: ID!) {
+        crawlingJobsByParentId(parentId: $parentId) {
+            id,
+            seed,
+            status,
+            linksFound
+        }
+    }
+`;
+
+  const response = await fetch(`${BACKEND_URL}/graphql`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      credentials: "include",
+      body: JSON.stringify({
+        query: crawlingJobsByParentIdQuery,
+        variables: {
+          parentId
+        }
+      }),
+    });
+  
+    return response;
+}
+
+export async function requestOriginalJobs(ownerId: string) {
     const originalJobsByOwnerQuery = `#graphql
         query JobsByOwner($owner: ID!) {
             originalCrawlingJobsByOwner(owner: $owner) {
+                id,
                 seed,
-                status
+                status,
+                linksFound
             }
         }
     `;
@@ -66,4 +97,31 @@ export async function requestJobs(ownerId: string) {
       });
     
       return response;
+}
+
+export async function createJob(ownerId: string, seed: string) {
+  const createJobQuery = `#graphql
+      mutation CreateCrawlingJob($owner: ID!, $seed: String!, $parent: ID) {
+          createCrawlingJob(owner: $owner, seed: $seed, parent: $parent) {
+              seed
+          }
+      }
+  `;
+
+  const response = await fetch(`${BACKEND_URL}/graphql`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      credentials: "include",
+      body: JSON.stringify({
+        query: createJobQuery,
+        variables: {
+          owner: ownerId,
+          seed
+        }
+      }),
+    });
+  
+    return response;
 }
