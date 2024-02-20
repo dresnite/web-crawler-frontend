@@ -25,7 +25,7 @@ export default function Jobs() {
             <div>
                 {jobCreationSection.isVisible && <CreateJob />}
                 {jobs.length === 0 && <EmptyJob getText={getEmptyText}/>}
-                {jobs.length > 0 && jobs.map((job, index) => {
+                {jobs.length > 0 && jobs.toReversed().map((job, index) => {
                     return <Job parentId={parentJobId} jobId={job.id!} key={index} seed={job.seed} status={job.status} links={job.linksFound} />
                 })}
             </div>
