@@ -16,6 +16,14 @@ export default function useJobs() {
     const ownerId = useUserId();
 
     useEffect(() => {
+        const interval = setInterval(() => {
+            sendJobsRequest();
+        }, 2000);
+
+        return  () => clearInterval(interval);
+    }, []);
+
+    useEffect(() => {
         console.log("received: " + parentJobId);
         sendJobsRequest();
     }, [parentJobId]);
